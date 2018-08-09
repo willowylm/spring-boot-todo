@@ -2,7 +2,6 @@ package com.thoughtworks.training.zhangtian.todoservice.service;
 
 import com.google.common.collect.ImmutableList;
 import com.thoughtworks.training.zhangtian.todoservice.model.Todo;
-import com.thoughtworks.training.zhangtian.todoservice.model.User;
 import com.thoughtworks.training.zhangtian.todoservice.repository.TodoRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.BeanUtils;

@@ -1,8 +1,8 @@
 package com.thoughtworks.training.zhangtian.todoservice.security;
 
 import com.google.common.net.HttpHeaders;
-import com.thoughtworks.training.zhangtian.todoservice.model.User;
-import com.thoughtworks.training.zhangtian.todoservice.service.UserService;
+import com.thoughtworks.training.zhangtian.todoservice.feign.UserFeign;
+//import com.thoughtworks.training.zhangtian.todoservice.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.Collections;
 @Component
 public class TodoAuthFilter extends OncePerRequestFilter {
     @Autowired
-    private UserService userService;
+    private UserFeign userFeign;
 
     @Value("${private.password}")
     private String privatePassword;
@@ -33,7 +33,9 @@ public class TodoAuthFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+        System.out.println("-----------------");
         if (!StringUtils.isEmpty(token)) {
+//            token.split(":")[1];
             Claims body = Jwts.parser()
                     .setSigningKey(privatePassword.getBytes("UTF-8"))
                     .parseClaimsJws(token)
@@ -51,11 +53,11 @@ public class TodoAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean validateToken(Claims body) {
-
-        User user = new User();
-        user.setName((String) body.get("name"));
-        user.setPassword((String) body.get("password"));
-        return userService.validate(user);
-    }
+//    private boolean validateToken(Claims body) {
+//
+//        User user = new User();
+//        user.setName((String) body.get("name"));
+//        user.setPassword((String) body.get("password"));
+//        return userService.validate(user);
+//    }
 }

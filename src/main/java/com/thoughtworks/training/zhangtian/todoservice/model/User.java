@@ -1,6 +1,7 @@
 package com.thoughtworks.training.zhangtian.todoservice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.tools.javac.comp.Todo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
+//@Entity
 public class User {
     @Id
     @GeneratedValue
@@ -30,10 +31,4 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private List<Todo> todos;
-
-    @Column(name = "deleted", columnDefinition = "int default 0")
-    private Boolean deleted = false;
 }

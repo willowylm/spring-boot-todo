@@ -4,6 +4,5 @@ create table todo(
   `is_complete` boolean default false,
   `date` timestamp default now(),
   `user_id` int,
-  `deleted` int default 0,
-	foreign key (user_id) references user(id)
+  `deleted` int default 0
 );
