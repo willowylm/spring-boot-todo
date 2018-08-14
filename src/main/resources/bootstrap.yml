@@ -1,0 +1,13 @@
+spring:
+   application:
+      name: todo-service
+   cloud:
+      config:
+        fail-fast: true
+        uri: http://config-server:8099/
+
+server:
+    port: 8082
+
+private:
+  password: zhangtian
